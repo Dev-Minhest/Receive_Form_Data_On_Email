@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive Form Data On Email</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form onsubmit="sendEmail(); reset(); return false;">
+            <h3>GỬI THÔNG TIN</h3>
+            <input type="text" id="name" placeholder="Tên của bạn" required>
+            <input type="email" id="email" placeholder="Nhập email" required>
+            <input type="text" id="phone" placeholder="Nhập số điện thoại" required>
+            <textarea id="message" rows="4" placeholder="Tôi có thể giúp gì cho bạn?"></textarea>
+            <button type="submit">Gửi</button>
+        </form>
+    </div>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            Email.send({
+                Host: "smtp.yourisp.com",
+                Username: "minhanh.nvd@gmail.com",
+                Password: "password",
+                To: 'ngonguyenkminh.dsn@gmail.com',
+                From: document.getElementById("email").value,
+                Subject: "Người liên hệ mới",
+                Body: "Tên: " + document.getElementById("name").value +
+                    "<br> Email: " + document.getElementById("email").value +
+                    "<br> Số điện thoại: " + document.getElementById("phone").value +
+                    "<br> Tin nhắn: " + document.getElementById("message").value
+            }).then(
+                message => alert("Tin nhắn đã được gửi!")
+            );
+        }
+    </script>
+</body>
+
+</html>
